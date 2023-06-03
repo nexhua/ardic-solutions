@@ -18,4 +18,4 @@ Sample Output:
 ### Question 4
 
 Sample Output:
-![Fourth Question Sample](./screenshots/q-4.png "4rd Question Sample")
+![Fourth Question Sample](./screenshots/q-4.png "4th Question Sample")
