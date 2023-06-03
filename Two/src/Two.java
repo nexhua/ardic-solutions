@@ -21,7 +21,7 @@ public class Two {
 
         System.out.println("Date format is : DD.MM.YYYY\n");
         for (Date date : searchedDates) {
-            System.out.println(date);
+            System.out.print(date + " ");
         }
     }
 }
