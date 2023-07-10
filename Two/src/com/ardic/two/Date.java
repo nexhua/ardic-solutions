@@ -13,6 +13,8 @@ public class Date {
 
     private WeekDays weekDay;
 
+    private static final Date EPOCH = new Date();
+
     public Date() {
         this.year = 1900;
         this.month = 1;
@@ -25,29 +27,26 @@ public class Date {
         this.month = month;
         this.monthDay = day;
 
-        Date epoch = new Date();
         long minutes = this.toMinutes();
 
         long dayInMinutes = 24L * 60L;
 
-        int dayDiff = (int) ((minutes - epoch.toMinutes()) / dayInMinutes);
+        int dayDiff = (int) ((minutes - EPOCH.toMinutes()) / dayInMinutes);
 
-        this.setWeekDay(calculateWeekDay(epoch.getWeekDay(), dayDiff));
+        this.setWeekDay(calculateWeekDay(EPOCH.getWeekDay(), dayDiff));
     }
 
 
     public long toMinutes() {
-        Date epoch = new Date();
-
         long yearMinutes = 0;
 
-        for (int i = epoch.getYear(); i < this.getYear(); i++) {
+        for (int i = EPOCH.getYear(); i < this.getYear(); i++) {
             yearMinutes += yearToMinutes(i);
         }
 
-        long monthDifference = monthsToMinutes(this.getMonth(), this.getYear()) - monthsToMinutes(epoch.getMonth(), epoch.getYear());
+        long monthDifference = monthsToMinutes(this.getMonth(), this.getYear()) - monthsToMinutes(EPOCH.getMonth(), EPOCH.getYear());
 
-        long dayDifference = daysToMinutes(this.getMonthDay()) - daysToMinutes(epoch.getMonthDay());
+        long dayDifference = daysToMinutes(this.getMonthDay()) - daysToMinutes(EPOCH.getMonthDay());
 
         return yearMinutes + monthDifference + dayDifference;
     }

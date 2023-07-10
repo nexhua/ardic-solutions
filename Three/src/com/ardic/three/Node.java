@@ -2,24 +2,22 @@ package com.ardic.three;
 
 public class Node {
 
-    private int value;
-
     public Node left = null;
     public Node right = null;
 
-    public Node(int value) {
-        this.value = value;
+    public Node() {
+
+    }
+
+    public void add(boolean isLeft) {
+        if (isLeft) {
+            this.left = new Node();
+        } else {
+            this.right = new Node();
+        }
     }
 
     //region Getters and Setters
-
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
 
     public Node getLeft() {
         return left;

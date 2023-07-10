@@ -3,29 +3,22 @@ import com.ardic.three.Node;
 
 public class Three {
     public static void main(String[] args) {
-        BTree tree = new BTree(new Node(50));
+        BTree tree = new BTree(new Node());
 
-        tree.add(25);
-        tree.add(52);
-        tree.add(12);
-        tree.add(65);
-        tree.add(97);
-        tree.add(53);
-        tree.add(27);
+        tree.getRoot().add(true);
+        tree.getRoot().add(false);
 
+        tree.getRoot().getLeft().add(true);
+        tree.getRoot().getLeft().add(false);
 
-        tree.inOrder(tree.getRoot());
+        tree.getRoot().getRight().add(true);
+        tree.getRoot().getRight().add(false);
 
-        Node node_25 = tree.find(25);
-        Node node_65 = tree.find(65);
-
-        System.out.println("\nIs Anomaly: " + tree.isAnomaly());
+        System.out.println("Is Anomaly: " + tree.isAnomaly());
 
         // Introduce anomaly
-        node_65.setLeft(node_25);
-
-        System.out.println("\nIs Anomaly: " + tree.isAnomaly());
-
+        tree.getRoot().getLeft().setRight(tree.getRoot());
+        System.out.println("Is Anomaly: " + tree.isAnomaly());
 
     }
 }
