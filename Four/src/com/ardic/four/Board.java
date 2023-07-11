@@ -114,7 +114,7 @@ public class Board {
 
             if (cell.getGroup() == null) {
                 group.add(cell);
-                queue.addAll(filterNeighbours(cell, getNeighbours(cell)));
+                queue.addAll(filterNeighbours(cell, getNeighbours(cell)).stream().filter(c -> c.getGroup() == null).toList());
             }
 
         }
