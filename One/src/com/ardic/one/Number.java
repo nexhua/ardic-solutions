@@ -14,8 +14,8 @@ public class Number {
 
     private boolean isFloating = false;
 
-    private double integralPart = 0;
-    private double fractionalPart = 0;
+    private String integralPart = "0";
+    private String fractionalPart = "0";
 
     public Number(BigDecimal number) {
         this.number = number;
@@ -27,39 +27,25 @@ public class Number {
             this.isNegative = true;
         }
 
-        BigDecimal fractional = this.number.remainder(BigDecimal.ONE);
+        BigDecimal fractional = this.number.remainder(BigDecimal.ONE).abs();
 
         if (fractional.compareTo(BigDecimal.ZERO) > 0) {
             this.isFloating = true;
 
-            DecimalFormat f = new DecimalFormat("0", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
-            f.setMaximumFractionDigits(340);
-
-            String numberString = f.format(this.number);
-
-            int delimeterIndex = numberString.indexOf('.');
-            String integralString = numberString.substring(0, delimeterIndex);
-            String fractionalString = numberString.substring(delimeterIndex + 1);
-
-            this.fractionalPart = Double.parseDouble(fractionalString);
-            this.integralPart = Double.parseDouble(integralString);
+            this.fractionalPart = fractional.toString().substring(2);
+            this.integralPart = this.number.toBigInteger().toString();
         } else {
-            this.integralPart = this.number.doubleValue();
+            this.integralPart = this.number.toBigInteger().toString();
         }
 
 
     }
 
 
-    private String convertNumber(double number) {
-        DecimalFormat f = new DecimalFormat("0", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
-        f.setMaximumFractionDigits(340);
-
+    private String convertNumber(String number) {
         StringBuilder sb = new StringBuilder();
 
-        String numberString = f.format(number);
-
-        int numberLength = numberString.length();
+        int numberLength = number.length();
         int numberGroupsLength = (int) Math.ceil(numberLength / 3.0);
 
         int groupEnd = numberLength;
@@ -69,7 +55,7 @@ public class Number {
 
 
         for (int i = numberGroupsLength - 1; i >= 0; i--) {
-            String group = numberString.substring(groupStart, groupEnd);
+            String group = number.substring(groupStart, groupEnd);
 
             sb.insert(0, Mappings.convertNumber(group, power));
 
@@ -87,7 +73,7 @@ public class Number {
 
         if (this.isNegative) {
             sb.append("eksi");
-            sb.append(convertNumber(this.integralPart * -1.0));
+            sb.append(convertNumber(this.integralPart.substring(1)));
         } else {
             sb.append(convertNumber(this.integralPart));
         }

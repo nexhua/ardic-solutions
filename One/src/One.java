@@ -11,8 +11,8 @@ public class One {
         Number num_3 = new Number(new BigDecimal("-84714.74"));
         Number num_4 = new Number(new BigDecimal("-1828174515234567890.123456789"));
 
-        //System.out.println(num_0);
-        //System.out.println(num_1);
+        System.out.println(num_0);
+        System.out.println(num_1);
         System.out.println(num_2);
         System.out.println(num_3);
         System.out.println(num_4);
