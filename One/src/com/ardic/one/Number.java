@@ -69,6 +69,10 @@ public class Number {
 
     @Override
     public String toString() {
+        if(this.number.compareTo(BigDecimal.ZERO) == 0) {
+            return "sifir";
+        }
+
         StringBuilder sb = new StringBuilder();
 
         if (this.isNegative) {
